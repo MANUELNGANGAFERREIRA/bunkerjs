@@ -1,0 +1,11 @@
+header{
+    
+    height: 10vh;
+    padding: 18px;
+    background-color: rgb(33, 150, 243);
+    color:#fff;
+    font-weight: bold;
+    font-family:cursive;
+    font-size: xx-large;
+    text-shadow: 0 0px 1px black;
+}
