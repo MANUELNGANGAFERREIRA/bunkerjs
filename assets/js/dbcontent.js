@@ -2156,22 +2156,21 @@ ulTitle.forEach((e, index) => {
 
         document.getElementById('article').innerHTML = livro[index].content
         let btnexecutecode = document.querySelectorAll('.btnexecutecode')
-
-        btnexecutecode.forEach((e,index)=>{
+        btnexecutecode.forEach((e, index) => {
+            e.addEventListener('click', () => {
+                const code = e.previousElementSibling.value;
+                const iframe = document.getElementById("output");
         
-                e.addEventListener('click', ()=>{
-                    
-                    const code = e.previousElementSibling.value
-                    const iframe = document.getElementById("output")
-                    
-                    iframe.contentDocument.open()
-                    iframe.contentDocument.write(code)
-                    iframe.contentDocument.close()
+                iframe.contentDocument.open();
+                iframe.contentDocument.write(code);
         
-                })
+                // Adiciona um pequeno atraso antes de fechar o documento
+                setTimeout(() => {
+                    iframe.contentDocument.close();
+                }, 100);
+            });
+        });
         
-        
-        })
         
     
     })

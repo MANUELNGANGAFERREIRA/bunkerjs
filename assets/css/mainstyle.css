@@ -78,6 +78,9 @@ align-content: center;
 text-transform: capitalize;
 border-radius: 10px;
     }
+    .ulTitle:hover{
+        background-color: rgb(33, 150, 243,.7);
+    }
 }
 
 
