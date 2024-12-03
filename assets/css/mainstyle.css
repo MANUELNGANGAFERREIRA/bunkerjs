@@ -1,101 +1,107 @@
-main{
+main {
     display: flex;
 }
-ul{
+
+ul {
     text-decoration: none;
     list-style-type: none;
 }
- aside{
+
+aside {
     width: 20%;
     padding: 20px;
     font-size: larger;
     color: #ccc;
     background-color: rgb(38, 38, 38);
 }
-iframe{
+
+iframe {
     width: 80%;
     height: 80vh;
     border: 1px solid #ccc;
 }
-article{
-width: 80%;
 
-height: 80vh;
-padding: 50px;
-background-color: rgb(44, 62, 80);
-color: azure;
-overflow-y: auto;
-scrollbar-width: none   ;
-cursor: pointer;
+article {
+    width: 80%;
 
-textarea{
-    width: 100%;
-    height: 300px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    overflow: auto;
-    white-space: pre;
-    border-radius: 10px;
-}
-
-.btnexecutecode{
-    border-radius: 10px;
-    padding: 10px;
+    height: 80vh;
+    padding: 4%;
+    background-color: rgb(44, 62, 80);
+    color: azure;
+    overflow-y: auto;
+    scrollbar-width: none;
     cursor: pointer;
-    font-weight: bold;
-    border: none;
-    transition: .03s;
-    background-color:  rgb(33, 150, 243);
-    color: #fff;
-}
-.btnexecutecode:hover{
-    background-color:  rgb(33, 150, 243, 0.8);
-}
-.btnexecutecode:active{
-    background-color:rgb(33, 150, 243, 0.8);
-    padding: 9px;
-    
-}
+
+    textarea {
+        width: 100%;
+        height: 300px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        overflow: auto;
+        white-space: pre;
+        border-radius: 10px;
+    }
+
+    .btnexecutecode {
+        border-radius: 10px;
+        padding: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        border: none;
+        transition: .03s;
+        background-color: rgb(33, 150, 243);
+        color: #fff;
+    }
+
+    .btnexecutecode:hover {
+        background-color: rgb(33, 150, 243, 0.8);
+    }
+
+    .btnexecutecode:active {
+        background-color: rgb(33, 150, 243, 0.8);
+        padding: 9px;
+
+    }
 }
 
 /*article*/
-#ulTitles{
+#ulTitles {
     background-color: rgb(38, 38, 38);
-    box-sizing: border-box;
     display: flex;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    scrollbar-width: none;
     width: 100%;
-    .ulTitle{
-        padding: 2px;
+    gap: 10px;
+overflow-y: hidden;
+scrollbar-width: none;
+    .ulTitle {
+        color: #fff;
+        width:fit-content;
         background-color: rgb(33, 150, 243);
-        color: white;
-        font-size: 14px;
-        font-weight: bold;
-        margin: 3px;
-align-content: center;
-text-transform: capitalize;
-border-radius: 10px;
+        white-space: nowrap;
+        padding: 10px;
+        border-radius: 10px;
     }
-    .ulTitle:hover{
-        background-color: rgb(33, 150, 243,.7);
+
+    .ulTitle:hover {
+        background-color: rgb(33, 150, 243, .7);
     }
 }
 
 
-@media screen and (width<=575px){
-    main{
+@media screen and (width<=575px) {
+    main {
         display: block;
     }
-    article,ul, aside{
+
+    article,
+    ul,
+    aside {
         width: 100%;
     }
-    #ulTitles{
-        overflow-y: scroll;
-        .ulTitle{
 
-        }
+    #ulTitles {
+        overflow-y: scroll;
+
+        .ulTitle {}
     }
 
 

@@ -2139,7 +2139,7 @@ var ulTitles = document.getElementById('ulTitles')
 
 livro.forEach((e, index) => {
 
-    var title = document.createElement('li')
+    var title = document.createElement('p')
 
     title.classList.add('ulTitle')
 
