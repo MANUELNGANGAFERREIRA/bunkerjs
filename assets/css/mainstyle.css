@@ -13,6 +13,7 @@ aside {
     font-size: larger;
     color: #ccc;
     background-color: rgb(38, 38, 38);
+    
 }
 
 iframe {
@@ -24,8 +25,8 @@ iframe {
 article {
     width: 80%;
 
-    height: 80vh;
-    padding: 4%;
+    height: 90vh;
+    padding: 16vh  4% 4% 4%;
     background-color: rgb(44, 62, 80);
     color: azure;
     overflow-y: auto;
@@ -41,7 +42,7 @@ article {
         white-space: pre;
         border-radius: 10px;
         background-color: #333;
-         color: #fff;
+        color: #fff;
     }
 
     .btnexecutecode {
@@ -66,21 +67,29 @@ article {
     }
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 /*article*/
 #ulTitles {
+    position: fixed;
     background-color: rgb(38, 38, 38);
     display: flex;
-    width: 100%;
+    width: 80%;
     gap: 10px;
-overflow-y: hidden;
-scrollbar-width: none;
-padding: 6px;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    padding: 6px;
+    border-radius: 10px;
     .ulTitle {
         color: #fff;
-        width:fit-content;
-       
-    background-image: linear-gradient(to right bottom,violet,rgb(33, 150, 243) );
-    white-space: nowrap;
+        width: fit-content;
+
+        background-color: rgb(33, 150, 243);
+        white-space: nowrap;
         padding: 10px;
         border-radius: 10px;
     }
@@ -90,7 +99,12 @@ padding: 6px;
     }
 }
 
+@media screen and (width>575px){
+aside{
+    padding-top: 16vh;
+}
 
+}
 @media screen and (width<=575px) {
     main {
         display: block;

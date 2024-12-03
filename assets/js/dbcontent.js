@@ -2150,7 +2150,7 @@ livro.forEach((e, index) => {
 
 let ulTitle = document.querySelectorAll('.ulTitle')
 
-ulTitle.forEach((e, index) => {
+/* ulTitle.forEach((e, index) => {
 
     e.addEventListener('click', () => {
 
@@ -2179,3 +2179,20 @@ ulTitle.forEach((e, index) => {
 
 
 })
+
+ */
+ulTitle.forEach((e, index) => {
+    e.addEventListener('click', () => {
+        document.getElementById('article').innerHTML = livro[index].content;
+        let btnexecutecode = document.querySelectorAll('.btnexecutecode');
+        btnexecutecode.forEach((e, index) => {
+            e.addEventListener('click', () => {
+                const code = e.previousElementSibling.value;
+                const iframe = document.getElementById("output");
+
+                // Define o conteúdo do iframe diretamente usando srcdoc
+                iframe.srcdoc = code;
+            });
+        });
+    });
+});
