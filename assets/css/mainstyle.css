@@ -78,8 +78,9 @@ padding: 6px;
     .ulTitle {
         color: #fff;
         width:fit-content;
-        background-color: rgb(33, 150, 243);
-        white-space: nowrap;
+       
+    background-image: linear-gradient(to right bottom,violet,rgb(33, 150, 243) );
+    white-space: nowrap;
         padding: 10px;
         border-radius: 10px;
     }
