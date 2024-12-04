@@ -12,7 +12,7 @@ aside {
     padding: 20px;
     font-size: larger;
     overflow-y: scroll;
-
+    
     color: #ccc;
     background-color: rgb(38, 38, 38);
     
@@ -26,8 +26,6 @@ iframe {
 
 article {
     width: 80%;
-
-    height: 90vh;
     padding: 16vh  4% 4% 4%;
     background-color: rgb(44, 62, 80);
     color: azure;
