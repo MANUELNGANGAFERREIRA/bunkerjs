@@ -15,7 +15,9 @@ aside {
     
     color: #ccc;
     background-color: rgb(38, 38, 38);
-    
+   iframe{
+    height: 100px;
+   } 
 }
 
 iframe {
