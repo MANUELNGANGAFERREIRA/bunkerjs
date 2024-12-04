@@ -12,7 +12,6 @@ aside {
     padding: 20px;
     font-size: larger;
     overflow-y: scroll;
-    max-width: 300px;
 
     color: #ccc;
     background-color: rgb(38, 38, 38);
