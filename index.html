@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="./assets/css/mainstyle.css">
 
     <link rel="shortcut icon" href="./assets/imagens/icon.ico" type="image/x-icon">
+    <meta name="theme-color" content="rgb(33, 150, 243)">
     <style>
         @font-face {
             font-family: 'Roboto';
@@ -34,7 +35,7 @@
             font-family: 'Roboto';
         }
         .ads-container { display: flex; flex-wrap: wrap; gap: 20px; } .ad { flex: 1 1 calc(33.333% - 20px); background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px; padding: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); text-align: center; } .ad img { max-width: 100%; height: auto; border-radius: 5px; } .ad-title { font-weight: bold; margin: 10px 0; color: #333; } .ad-text { margin-bottom: 10px; color: #666; } .ad-link { display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 5px; } .ad-link:hover { background-color: #0056b3; }
-        
+        * { user-select: none; }
        </style>
 </head>
 
@@ -155,7 +156,41 @@
             <script type="text/javascript" src="//www.highperformanceformat.com/c922bb269136aea30f48917e5fd39fe3/invoke.js"></script>
             <script src="https://pertawee.net/act/files/tag.min.js?z=8602080" data-cfasync="false" async></script>
 
+<script>
+  (function() {
+    var originalConsoleLog = console.log;
+    var originalConsoleWarn = console.warn;
+    var originalConsoleError = console.error;
+    var originalConsoleInfo = console.info;
 
+    console.log = function() {};
+    console.warn = function() {};
+    console.error = function() {};
+    console.info = function() {};
+
+    window.addEventListener('keydown', function(e) {
+        if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+            e.preventDefault();
+        }
+    });
+
+    window.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+    window.addEventListener('keydown', function(e) {
+        if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+            e.preventDefault();
+        }
+    });
+
+    window.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+})();
+
+  
+  </script>
         </aside>
     </main>
     <footer>
