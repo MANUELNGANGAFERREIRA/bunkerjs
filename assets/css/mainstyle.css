@@ -88,7 +88,7 @@ body {
     .ulTitle {
         color: #fff;
         width: fit-content;
-
+        cursor: pointer;
         background-color: rgb(33, 150, 243);
         white-space: nowrap;
         padding: 10px;
