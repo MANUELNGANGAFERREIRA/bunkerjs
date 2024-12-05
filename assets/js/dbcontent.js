@@ -2196,3 +2196,55 @@ ulTitle.forEach((e, index) => {
         });
     });
 });
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const auth = '8d97ed55fa95dae67a5a8bc54f5a5be4c7b722aa'; // Seu token de autenticação
+    const ua = navigator.userAgent; // Agente do usuário (User Agent) do navegador
+    const varParam = '2717337'; // ID da fonte de tráfego
+
+    // Obtém o endereço IP do usuário
+    fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+            const ip = data.ip; // Endereço IP do usuário
+
+            // Faz a requisição à API da Monetag
+            fetch(`http://offers.propellerads.com/api/v1/ads/8601897/?auth=${auth}&ua=${ua}&ip=${ip}&var=${varParam}`)
+                .then(response => response.json())
+                .then(data => {
+                    const adsDiv = document.getElementById('ads');
+                    data.ads.forEach(ad => {
+                        const adContainer = document.createElement('div');
+                        adContainer.className = 'ad';
+
+                        const adImage = document.createElement('img');
+                        adImage.src = ad.image;
+                        adContainer.appendChild(adImage);
+
+                        const adTitle = document.createElement('div');
+                        adTitle.className = 'ad-title';
+                        adTitle.textContent = ad.title;
+                        adContainer.appendChild(adTitle);
+
+                        const adText = document.createElement('div');
+                        adText.className = 'ad-text';
+                        adText.textContent = ad.text;
+                        adContainer.appendChild(adText);
+
+                        const adLink = document.createElement('a');
+                        adLink.href = ad.click_url;
+                        adLink.className = 'ad-link';
+                        adLink.textContent = 'Saiba Mais';
+                        adLink.target = '_blank';
+                        adContainer.appendChild(adLink);
+
+                        adsDiv.appendChild(adContainer);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        })
+        .catch(error => console.error('Error ao obter o IP:', error));
+});
+
