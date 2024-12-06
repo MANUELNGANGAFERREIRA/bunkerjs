@@ -225,60 +225,44 @@
         <p>&copy; 2024 Bunker Js. Todos os Direitos reservados</p>
     </footer>
     <script defer>
-        let linkAnuncio = "https://www.profitablecpmrate.com/eey46mv65j?key=a2eac7825ff7405fadb076fb97cd352b"
-        let contadorCliques = 0
-        function abrirAnuncio() {
-            contadorCliques++
-            if (contadorCliques == 3) {
+        let linkAnuncio = "https://www.profitablecpmrate.com/eey46mv65j?key=a2eac7825ff7405fadb076fb97cd352b";
+let contadorCliques = 0;
 
-                setTimeout(function () {
-                    window.open(linkAnuncio, '_blank', 'width=500,height=500');
+function abrirAnuncio() {
+    contadorCliques++;
+    if (contadorCliques === 3) {
+        setTimeout(function () {
+            window.open(linkAnuncio, '_blank', 'noopener,noreferrer');
+        }, 2000);
+    } else if (contadorCliques === 10) {
+        setTimeout(function () {
+            window.open(linkAnuncio, '_blank', 'noopener,noreferrer');
+            contadorCliques = -5;
+        }, 2000);
+    }
+}
 
-                }, 2000)
+document.addEventListener('click', abrirAnuncio);
 
+let linkAnuncio2 = "https://luglawhaulsano.net/4/8450753";
+let contadorCliques2 = 0;
 
-            }
-            else if (contadorCliques == 10) {
+function abrirAnuncio2() {
+    contadorCliques2++;
+    if (contadorCliques2 === 6) {
+        setTimeout(function () {
+            window.open(linkAnuncio2, '_blank', 'noopener,noreferrer');
+        }, 2000);
+    } else if (contadorCliques2 === 5) {
+        setTimeout(function () {
+            window.open(linkAnuncio2, '_blank', 'noopener,noreferrer');
+            contadorCliques2 = -8;
+        }, 2000);
+    }
+}
 
-                setTimeout(function () {
-                    window.open(linkAnuncio, '_blank', 'width=500,height=500');
-                    contadorCliques = -5
-                }, 2000)
+document.addEventListener('click', abrirAnuncio2);
 
-
-            }
-
-        }
-
-        document.addEventListener('click', abrirAnuncio)
-        //
-
-        let linkAnuncio2 = "https://luglawhaulsano.net/4/8450753"
-        let contadorCliques2 = 0
-        function abrirAnuncio2() {
-            contadorCliques2++
-            if (contadorCliques2 == 6) {
-
-                setTimeout(function () {
-                    window.open(linkAnuncio2, '_blank', 'width=500,height=500');
-
-                }, 2000)
-
-
-            }
-            else if (contadorCliques2 == 5) {
-
-                setTimeout(function () {
-                    window.open(linkAnuncio2, '_blank', 'width=500,height=500');
-                    contadorCliques2 = -8
-                }, 2000)
-
-
-            }
-
-        }
-
-        document.addEventListener('click', abrirAnuncio2)
 
     </script>
     <script defer src="./assets/js/dbcontent.js"></script>

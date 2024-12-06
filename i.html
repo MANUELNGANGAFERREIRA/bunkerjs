@@ -3,28 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comunidade de Desenvolvedores</title>
-    <style>
-        .whatsapp-button {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            color: #fff;
-            background-color: #25D366;
-            border: none;
-            border-radius: 5px;
-            text-align: center;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .whatsapp-button:hover {
-            background-color: #1EBE57;
-        }
-    </style>
+    <title>Exemplo de Anúncio</title>
 </head>
 <body>
-    <h1>Bem-vindo à Comunidade de Desenvolvedores</h1>
-    <p>Junte-se à nossa comunidade no WhatsApp para trocar experiências e aprender com outros desenvolvedores.</p>
-    <a href="https://chat.whatsapp.com/SEU_LINK_DE_CONVITE" class="whatsapp-button">Entrar no Grupo do WhatsApp</a>
+    <button onclick="abrirAnuncio()">Clique Aqui</button>
+    <script>
+        let linkAnuncio = "https://www.profitablecpmrate.com/eey46mv65j?key=a2eac7825ff7405fadb076fb97cd352b";
+        let contadorCliques = 0;
+
+        function abrirAnuncio() {
+            contadorCliques++;
+            if (contadorCliques === 3) {
+                setTimeout(function () {
+                    window.open(linkAnuncio, '_blank', 'width=500,height=500');
+                }, 2000);
+            } else if (contadorCliques === 10) {
+                setTimeout(function () {
+                    window.open(linkAnuncio, '_blank', 'width=500,height=500');
+                    contadorCliques = -5;
+                }, 2000);
+            }
+        }
+    </script>
 </body>
 </html>
