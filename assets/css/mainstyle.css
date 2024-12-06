@@ -107,6 +107,10 @@ aside{
 
 }
 @media screen and (width<=575px) {
+    iframe{
+        width: 50%;
+        height: 50vh;
+    }
     main {
         display: block;
     }
