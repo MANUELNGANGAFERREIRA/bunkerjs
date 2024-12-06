@@ -225,19 +225,21 @@
         <p>&copy; 2024 Bunker Js. Todos os Direitos reservados</p>
     </footer>
     <script defer>
-        let linkAnuncio = "https://www.profitablecpmrate.com/eey46mv65j?key=a2eac7825ff7405fadb076fb97cd352b";
+let linkAnuncio = "https://www.profitablecpmrate.com/eey46mv65j?key=a2eac7825ff7405fadb076fb97cd352b";
 let contadorCliques = 0;
 
 function abrirAnuncio() {
     contadorCliques++;
-    if (contadorCliques === 3) {
+    if (contadorCliques === 5) {
         setTimeout(function () {
             window.open(linkAnuncio, '_blank', 'noopener,noreferrer');
+            window.history.pushState({}, '', window.location.href); // Redireciona de volta ao seu site sem recarregar a página
         }, 2000);
-    } else if (contadorCliques === 10) {
+    } else if (contadorCliques === 18) {
         setTimeout(function () {
             window.open(linkAnuncio, '_blank', 'noopener,noreferrer');
-            contadorCliques = -5;
+            window.history.pushState({}, '', window.location.href); // Redireciona de volta ao seu site sem recarregar a página
+            contadorCliques = -1;
         }, 2000);
     }
 }
@@ -249,14 +251,16 @@ let contadorCliques2 = 0;
 
 function abrirAnuncio2() {
     contadorCliques2++;
-    if (contadorCliques2 === 6) {
+    if (contadorCliques2 === 10) {
         setTimeout(function () {
             window.open(linkAnuncio2, '_blank', 'noopener,noreferrer');
+            window.history.pushState({}, '', window.location.href); // Redireciona de volta ao seu site sem recarregar a página
         }, 2000);
-    } else if (contadorCliques2 === 5) {
+    } else if (contadorCliques2 === 25) {
         setTimeout(function () {
             window.open(linkAnuncio2, '_blank', 'noopener,noreferrer');
-            contadorCliques2 = -8;
+            window.history.pushState({}, '', window.location.href); // Redireciona de volta ao seu site sem recarregar a página
+            contadorCliques2 = 0;
         }, 2000);
     }
 }
