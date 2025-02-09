@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abrindo e Limpando Anúncios</title>
+    <title>Exibindo Anúncios</title>
     <style>
         body {
             display: flex;
@@ -29,21 +29,19 @@
 
         let currentIndex = 0;
 
-        function openAdsStepByStep() {
+        function openAdsSequentially() {
             if (currentIndex >= urls.length) {
-                alert("Todos os anúncios foram exibidos e o histórico foi limpo.");
+                alert("Todos os anúncios foram exibidos. Redirecionando...");
+                window.location.href = "https://seusite.com"; // Voltar para sua página
                 return;
             }
 
-            let tab = window.open(urls[currentIndex], '_blank');
+            window.location.href = urls[currentIndex];
+            currentIndex++;
 
             setTimeout(() => {
-                if (tab && !tab.closed) {
-                    tab.close();
-                }
                 clearSiteData();
-                currentIndex++;
-                openAdsStepByStep();
+                openAdsSequentially();
             }, 1000);
         }
 
@@ -67,7 +65,7 @@
     </script>
 </head>
 <body>
-    <h2>Clique no botão para abrir os anúncios</h2>
-    <button onclick="openAdsStepByStep()">Abrir Anúncios</button>
+    <h2>Clique no botão para ver os anúncios</h2>
+    <button onclick="openAdsSequentially()">Ver Anúncios</button>
 </body>
 </html>
