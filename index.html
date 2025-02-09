@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iframes com Tratamento de Erros</title>
+    <title>Abrindo Anúncios em Abas</title>
     <style>
         body, html {
             margin: 0;
@@ -12,12 +12,9 @@
             display: flex;
             flex-direction: column;
             position: relative;
-        }
-        iframe {
-            flex: 1;
-            width: 100%;
-            border: none;
-            filter: blur(1px); /* Aplica o filtro de desfoque */
+            justify-content: center;
+            align-items: center;
+            background-color: #f9f9f9;
         }
         .overlay {
             position: absolute;
@@ -25,7 +22,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
+            background-color: rgba(255, 255, 255, 0.9);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -35,15 +32,10 @@
             text-align: center;
         }
         .fallback {
-            display: none; /* Inicialmente oculto */
-            flex: 1;
-            width: 100%;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: none;
             font-size: 18px;
             color: #555;
+            margin-top: 20px;
         }
     </style>
     <script>
@@ -54,42 +46,31 @@
                 'https://www.effectiveratecpm.com/j1kdjr9s6?key=f2d7571f8ce13d380e1cba14a12fe05b'
             ];
 
-            const container = document.body;
-            let currentIndex = 0;
-
-            function addIframe(url) {
-                const iframe = document.createElement('iframe');
-                iframe.src = url;
-
-                iframe.onload = function() {
-                    console.log(`Iframe ${currentIndex + 1} carregado com sucesso.`);
-                    currentIndex++;
-                    if (currentIndex < iframeUrls.length) {
-                        setTimeout(() => addIframe(iframeUrls[currentIndex]), 2000);
+            function openAllAds() {
+                let opened = false;
+                
+                iframeUrls.forEach((url, index) => {
+                    let newTab = window.open(url, '_blank');
+                    if (!newTab) {
+                        console.error(`Erro ao abrir anúncio ${index + 1}`);
+                        document.getElementById('fallback').style.display = 'block';
+                    } else {
+                        opened = true;
                     }
-                };
+                });
 
-                iframe.onerror = function() {
-                    console.error(`Erro ao carregar iframe ${currentIndex + 1}. Tentando novamente...`);
-                    const fallbackDiv = document.createElement('div');
-                    fallbackDiv.className = 'fallback';
-                    fallbackDiv.textContent = 'Erro ao carregar o anúncio. Tentando o próximo...';
-                    container.appendChild(fallbackDiv);
-
-                    setTimeout(() => {
-                        container.removeChild(fallbackDiv);
-                        addIframe(url);
-                    }, 3000);
-                };
-
-                container.appendChild(iframe);
+                if (opened) {
+                    document.getElementById('overlay').style.display = 'block';
+                }
             }
 
-            addIframe(iframeUrls[currentIndex]);
+            // Abrir anúncios após 2 segundos
+            setTimeout(openAllAds, 2000);
         });
     </script>
 </head>
 <body>
-    <div class="overlay">Obrigado por ver os anúncios, eles nos ajudam bastante!</div>
+    <div id="overlay" class="overlay">Obrigado por ver os anúncios, eles nos ajudam bastante!</div>
+    <div id="fallback" class="fallback">Não conseguimos abrir os anúncios. Verifique se seu navegador está bloqueando pop-ups.</div>
 </body>
 </html>
