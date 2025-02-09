@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abrindo Anúncios em Abas</title>
+    <title>Abrindo Anúncios e Fechando</title>
     <style>
         body, html {
             margin: 0;
@@ -11,81 +11,70 @@
             height: 100%;
             display: flex;
             flex-direction: column;
-            position: relative;
             justify-content: center;
             align-items: center;
             background-color: #f9f9f9;
+            text-align: center;
         }
         .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
             font-size: 24px;
             font-weight: bold;
             color: black;
-            text-align: center;
-        }
-        .fallback {
-            display: none;
-            font-size: 18px;
-            color: #555;
-            margin-top: 20px;
         }
     </style>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const iframeUrls = [
+        let openedTabs = [];
+
+        function openAllAds() {
+            const urls = [
                 'https://www.effectiveratecpm.com/q4tbink2t6?key=4f2fe948157a84b7a7c851c8162ddce9',
                 'https://www.effectiveratecpm.com/wna3bzxq?key=0cd41fc5457b22a8eeeccaefd376b64f',
                 'https://www.effectiveratecpm.com/j1kdjr9s6?key=f2d7571f8ce13d380e1cba14a12fe05b'
             ];
 
-            let openedTabs = [];
+            openedTabs = urls.map(url => window.open(url, '_blank'));
 
-            function openAllAds() {
-                let opened = false;
-                
-                iframeUrls.forEach((url, index) => {
-                    let newTab = window.open(url, '_blank');
-                    if (!newTab) {
-                        console.error(`Erro ao abrir anúncio ${index + 1}`);
-                        document.getElementById('fallback').style.display = 'block';
-                    } else {
-                        openedTabs.push(newTab);
-                        opened = true;
-                    }
-                });
+            if (openedTabs.some(tab => tab)) {
+                document.getElementById('overlay').innerText = "Os anúncios foram abertos! Serão fechados em 3 segundos...";
+                setTimeout(closeAllAds, 3000);
+            } else {
+                document.getElementById('overlay').innerText = "Não foi possível abrir os anúncios. Verifique o bloqueador de pop-ups.";
+            }
+        }
 
-                if (opened) {
-                    document.getElementById('overlay').style.display = 'block';
-
-                    // Fechar as abas após 3 segundos
-                    setTimeout(closeAllAds, 3000);
+        function closeAllAds() {
+            openedTabs.forEach(tab => {
+                if (tab && !tab.closed) {
+                    tab.close();
                 }
-            }
+            });
 
-            function closeAllAds() {
-                openedTabs.forEach(tab => {
-                    if (tab && !tab.closed) {
-                        tab.close();
-                    }
+            clearSiteData();
+            document.getElementById('overlay').innerText = "Os anúncios foram fechados e os dados do site foram limpos.";
+        }
+
+        function clearSiteData() {
+            try {
+                sessionStorage.clear();
+                localStorage.clear();
+                document.cookie.split(";").forEach(cookie => {
+                    document.cookie = cookie.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
                 });
-                document.getElementById('overlay').innerText = "Os anúncios foram fechados.";
-            }
 
-            // Abrir anúncios após 2 segundos
-            setTimeout(openAllAds, 2000);
-        });
+                if ('caches' in window) {
+                    caches.keys().then(names => {
+                        names.forEach(name => caches.delete(name));
+                    });
+                }
+            } catch (error) {
+                console.error("Erro ao limpar cache e dados do site:", error);
+            }
+        }
     </script>
 </head>
 <body>
-    <div id="overlay" class="overlay">Obrigado por ver os anúncios, eles nos ajudam bastante!</div>
-    <div id="fallback" class="fallback">Não conseguimos abrir os anúncios. Verifique se seu navegador está bloqueando pop-ups.</div>
+    <div id="overlay" class="overlay">
+        <button onclick="openAllAds()">Abrir Anúncios</button>
+    </div>
 </body>
 </html>
