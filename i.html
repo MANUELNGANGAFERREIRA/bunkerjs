@@ -3,28 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abrindo Anúncios e Fechando</title>
+    <title>Abrindo Anúncios Corretamente</title>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
+        body {
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
+            height: 100vh;
             background-color: #f9f9f9;
+            flex-direction: column;
             text-align: center;
         }
-        .overlay {
-            font-size: 24px;
-            font-weight: bold;
-            color: black;
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
         }
     </style>
     <script>
-        let openedTabs = [];
-
         function openAllAds() {
             const urls = [
                 'https://www.effectiveratecpm.com/q4tbink2t6?key=4f2fe948157a84b7a7c851c8162ddce9',
@@ -32,49 +28,22 @@
                 'https://www.effectiveratecpm.com/j1kdjr9s6?key=f2d7571f8ce13d380e1cba14a12fe05b'
             ];
 
-            openedTabs = urls.map(url => window.open(url, '_blank'));
+            let openedTabs = urls.map(url => window.open(url, '_blank'));
 
-            if (openedTabs.some(tab => tab)) {
-                document.getElementById('overlay').innerText = "Os anúncios foram abertos! Serão fechados em 3 segundos...";
-                setTimeout(closeAllAds, 3000);
-            } else {
-                document.getElementById('overlay').innerText = "Não foi possível abrir os anúncios. Verifique o bloqueador de pop-ups.";
-            }
-        }
-
-        function closeAllAds() {
-            openedTabs.forEach(tab => {
-                if (tab && !tab.closed) {
-                    tab.close();
-                }
-            });
-
-            clearSiteData();
-            document.getElementById('overlay').innerText = "Os anúncios foram fechados e os dados do site foram limpos.";
-        }
-
-        function clearSiteData() {
-            try {
-                sessionStorage.clear();
-                localStorage.clear();
-                document.cookie.split(";").forEach(cookie => {
-                    document.cookie = cookie.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+            // Fecha todas as abas após 3 segundos
+            setTimeout(() => {
+                openedTabs.forEach(tab => {
+                    if (tab && !tab.closed) {
+                        tab.close();
+                    }
                 });
-
-                if ('caches' in window) {
-                    caches.keys().then(names => {
-                        names.forEach(name => caches.delete(name));
-                    });
-                }
-            } catch (error) {
-                console.error("Erro ao limpar cache e dados do site:", error);
-            }
+                alert("Os anúncios foram fechados!");
+            }, 3000);
         }
     </script>
 </head>
 <body>
-    <div id="overlay" class="overlay">
-        <button onclick="openAllAds()">Abrir Anúncios</button>
-    </div>
+    <h2>Clique no botão para abrir os anúncios</h2>
+    <button onclick="openAllAds()">Abrir Anúncios</button>
 </body>
 </html>
