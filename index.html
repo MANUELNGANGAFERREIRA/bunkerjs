@@ -3,50 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abrindo Anúncios</title>
+    <title>Abrir Anúncios</title>
     <style>
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f9f9f9;
             flex-direction: column;
-            text-align: center;
+            background-color: #f4f4f4;
         }
         button {
             font-size: 18px;
             padding: 10px 20px;
-            cursor: pointer;
             margin: 10px;
+            cursor: pointer;
         }
         .hidden {
             display: none;
         }
     </style>
     <script>
-        const urls = [
-            'https://www.effectiveratecpm.com/q4tbink2t6?key=4f2fe948157a84b7a7c851c8162ddce9',
-            'https://www.effectiveratecpm.com/wna3bzxq?key=0cd41fc5457b22a8eeeccaefd376b64f',
-            'https://www.effectiveratecpm.com/j1kdjr9s6?key=f2d7571f8ce13d380e1cba14a12fe05b'
-        ];
-
-        function openAd(index) {
-            if (index >= urls.length) return;
-
-            let adWindow = window.open(urls[index], '_blank', 'noopener,noreferrer');
+        function openAd(buttonId, url) {
+            let adWindow = window.open(url, '_blank', 'noopener,noreferrer');
 
             if (adWindow) {
                 setTimeout(() => {
                     adWindow.close();
                     clearSiteData();
-                    window.location.reload(); // 🔥 Recarrega a página para esconder o botão clicado
-                }, 10000); // ⏳ Agora a aba fica aberta por 10 segundos
+                    document.getElementById(buttonId).classList.add('hidden'); // Esconde o botão clicado
+                }, 5000); // ⏳ Fecha todas as abas em 5 segundos
             } else {
-                alert("Seu navegador bloqueou a abertura da aba. Permita pop-ups para continuar.");
+                alert("Permita pop-ups para continuar.");
             }
-
-            document.getElementById(`btn${index}`).classList.add('hidden');
         }
 
         function clearSiteData() {
@@ -70,8 +59,8 @@
 </head>
 <body>
     <h2>Clique nos botões para abrir os anúncios</h2>
-    <button id="btn0" onclick="openAd(0)">Abrir Anúncio 1</button>
-    <button id="btn1" onclick="openAd(1)">Abrir Anúncio 2</button>
-    <button id="btn2" onclick="openAd(2)">Abrir Anúncio 3</button>
+    <button id="btn1" onclick="openAd('btn1', 'https://www.effectiveratecpm.com/q4tbink2t6?key=4f2fe948157a84b7a7c851c8162ddce9')">Abrir Anúncio 1</button>
+    <button id="btn2" onclick="openAd('btn2', 'https://www.effectiveratecpm.com/wna3bzxq?key=0cd41fc5457b22a8eeeccaefd376b64f')">Abrir Anúncio 2</button>
+    <button id="btn3" onclick="openAd('btn3', 'https://www.effectiveratecpm.com/j1kdjr9s6?key=f2d7571f8ce13d380e1cba14a12fe05b')">Abrir Anúncio 3</button>
 </body>
 </html>
