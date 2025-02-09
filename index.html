@@ -36,17 +36,33 @@
         }
     </style>
     <script>
-        function loadIframe(id, src, delay) {
-            setTimeout(function() {
-                document.getElementById(id).src = src;
-            }, delay);
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const iframeUrls = [
+                'https://www.profitablecpmrate.com/j1kdjr9s6?key=f2d7571f8ce13d380e1cba14a12fe05b',
+                'https://www.profitablecpmrate.com/wna3bzxq?key=0cd41fc5457b22a8eeeccaefd376b64f',
+                'https://www.profitablecpmrate.com/eey46mv65j?key=a2eac7825ff7405fadb076fb97cd352b'
+            ];
+
+            const container = document.body;
+            let currentIndex = 0;
+
+            function addIframe(url) {
+                const iframe = document.createElement('iframe');
+                iframe.src = url;
+                iframe.onload = function() {
+                    currentIndex++;
+                    if (currentIndex < iframeUrls.length) {
+                        setTimeout(() => addIframe(iframeUrls[currentIndex]), 2000);
+                    }
+                };
+                container.appendChild(iframe);
+            }
+
+            addIframe(iframeUrls[currentIndex]);
+        });
     </script>
 </head>
 <body>
     <div class="overlay">Obrigado por ver os anúncios, eles nos ajudam bastante!</div>
-    <iframe src="https://www.profitablecpmrate.com/j1kdjr9s6?key=f2d7571f8ce13d380e1cba14a12fe05b" onload="loadIframe('iframe2', 'https://www.profitablecpmrate.com/wna3bzxq?key=0cd41fc5457b22a8eeeccaefd376b64f', 2000);"></iframe>
-    <iframe id="iframe2" onload="loadIframe('iframe3', 'https://www.profitablecpmrate.com/eey46mv65j?key=a2eac7825ff7405fadb076fb97cd352b', 2000);"></iframe>
-    <iframe id="iframe3"></iframe>
 </body>
 </html>
