@@ -26,7 +26,26 @@
                     document.getElementById(closeId).src = '';
                 }
                 document.getElementById(id).src = src;
+                filterContent(id); // Adiciona a verificação de conteúdo
             }, delay);
+        }
+
+        function filterContent(id) {
+            const forbiddenKeywords = ["porn", "adult", "xxx", "18+"];
+            const iframe = document.getElementById(id);
+            iframe.onload = function() {
+                const content = iframe.contentDocument || iframe.contentWindow.document;
+                const bodyText = content.body.innerText.toLowerCase();
+
+                let containsForbiddenContent = forbiddenKeywords.some(keyword => bodyText.includes(keyword));
+
+                if (containsForbiddenContent) {
+                    iframe.src = ''; // Remove o conteúdo inadequado
+                    alert('Conteúdo bloqueado devido a material inadequado.');
+                } else {
+                    alert('Conteúdo aprovado.');
+                }
+            };
         }
 
         function redirectAfterDelay(url, delay) {
