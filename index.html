@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abrindo Anúncios Corretamente</title>
+    <title>Abrindo e Limpando Anúncios</title>
     <style>
         body {
             display: flex;
@@ -21,29 +21,53 @@
         }
     </style>
     <script>
-        function openAllAds() {
-            const urls = [
-                'https://www.effectiveratecpm.com/q4tbink2t6?key=4f2fe948157a84b7a7c851c8162ddce9',
-                'https://www.effectiveratecpm.com/wna3bzxq?key=0cd41fc5457b22a8eeeccaefd376b64f',
-                'https://www.effectiveratecpm.com/j1kdjr9s6?key=f2d7571f8ce13d380e1cba14a12fe05b'
-            ];
+        const urls = [
+            'https://www.effectiveratecpm.com/q4tbink2t6?key=4f2fe948157a84b7a7c851c8162ddce9',
+            'https://www.effectiveratecpm.com/wna3bzxq?key=0cd41fc5457b22a8eeeccaefd376b64f',
+            'https://www.effectiveratecpm.com/j1kdjr9s6?key=f2d7571f8ce13d380e1cba14a12fe05b'
+        ];
 
-            let openedTabs = urls.map(url => window.open(url, '_blank'));
+        let currentIndex = 0;
 
-            // Fecha todas as abas após 3 segundos
+        function openAdsStepByStep() {
+            if (currentIndex >= urls.length) {
+                alert("Todos os anúncios foram exibidos e o histórico foi limpo.");
+                return;
+            }
+
+            let tab = window.open(urls[currentIndex], '_blank');
+
             setTimeout(() => {
-                openedTabs.forEach(tab => {
-                    if (tab && !tab.closed) {
-                        tab.close();
-                    }
+                if (tab && !tab.closed) {
+                    tab.close();
+                }
+                clearSiteData();
+                currentIndex++;
+                openAdsStepByStep();
+            }, 1000);
+        }
+
+        function clearSiteData() {
+            try {
+                sessionStorage.clear();
+                localStorage.clear();
+                document.cookie.split(";").forEach(cookie => {
+                    document.cookie = cookie.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
                 });
-                alert("Os anúncios foram fechados!");
-            }, 3000);
+
+                if ('caches' in window) {
+                    caches.keys().then(names => {
+                        names.forEach(name => caches.delete(name));
+                    });
+                }
+            } catch (error) {
+                console.error("Erro ao limpar cache e dados do site:", error);
+            }
         }
     </script>
 </head>
 <body>
     <h2>Clique no botão para abrir os anúncios</h2>
-    <button onclick="openAllAds()">Abrir Anúncios</button>
+    <button onclick="openAdsStepByStep()">Abrir Anúncios</button>
 </body>
 </html>
