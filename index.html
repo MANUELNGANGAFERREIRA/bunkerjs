@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exibindo Anúncios</title>
+    <title>Abrindo Anúncios</title>
     <style>
         body {
             display: flex;
@@ -29,19 +29,22 @@
 
         let currentIndex = 0;
 
-        function openAdsSequentially() {
+        function openAdsOneByOne() {
             if (currentIndex >= urls.length) {
                 alert("Todos os anúncios foram exibidos. Redirecionando...");
                 window.location.href = "https://seusite.com"; // Voltar para sua página
                 return;
             }
 
-            window.location.href = urls[currentIndex];
-            currentIndex++;
+            let newTab = window.open(urls[currentIndex], '_blank');
 
             setTimeout(() => {
+                if (newTab && !newTab.closed) {
+                    newTab.close();
+                }
                 clearSiteData();
-                openAdsSequentially();
+                currentIndex++;
+                openAdsOneByOne();
             }, 1000);
         }
 
@@ -65,7 +68,7 @@
     </script>
 </head>
 <body>
-    <h2>Clique no botão para ver os anúncios</h2>
-    <button onclick="openAdsSequentially()">Ver Anúncios</button>
+    <h2>Clique no botão para abrir os anúncios</h2>
+    <button onclick="openAdsOneByOne()">Abrir Anúncios</button>
 </body>
 </html>
