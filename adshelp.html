@@ -20,32 +20,45 @@
         }
     </style>
     <script>
+        function isSafeUrl(url) {
+            const forbiddenKeywords = [
+                "porn", "adult", "xxx", "18+", "sex", "hot", "erotic", 
+                "nude", "fetish", "escort", "playboy", "lingerie", "hardcore"
+            ];
+            return !forbiddenKeywords.some(keyword => url.toLowerCase().includes(keyword));
+        }
+
         function loadIframe(id, src, delay, closeId = null) {
             setTimeout(function() {
+                const iframe = document.getElementById(id);
+
+                if (!isSafeUrl(src)) {
+                    console.log(`❌ BLOQUEADO: ${src}`);
+                    iframe.srcdoc = `
+                        <html>
+                        <head>
+                            <style>
+                                body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+                                h2 { color: red; }
+                                p { font-size: 16px; }
+                            </style>
+                        </head>
+                        <body>
+                            <h2>⚠ Conteúdo Bloqueado</h2>
+                            <p>Este conteúdo foi bloqueado por nós porque não obedece às nossas regras.</p>
+                        </body>
+                        </html>
+                    `;
+                    return;
+                }
+
                 if (closeId) {
                     document.getElementById(closeId).src = '';
                 }
-                document.getElementById(id).src = src;
-                filterContent(id); // Adiciona a verificação de conteúdo
+
+                iframe.src = src;
+                console.log(`✅ CARREGANDO: ${src}`);
             }, delay);
-        }
-
-        function filterContent(id) {
-            const forbiddenKeywords = ["porn", "adult", "xxx", "18+"];
-            const iframe = document.getElementById(id);
-            iframe.onload = function() {
-                const content = iframe.contentDocument || iframe.contentWindow.document;
-                const bodyText = content.body.innerText.toLowerCase();
-
-                let containsForbiddenContent = forbiddenKeywords.some(keyword => bodyText.includes(keyword));
-
-                if (containsForbiddenContent) {
-                    iframe.src = ''; // Remove o conteúdo inadequado
-                    console.log('Conteúdo bloqueado devido a material inadequado.');
-                } else {
-                    console.log('Conteúdo aprovado.');
-                }
-            };
         }
 
         function redirectAfterDelay(url, delay) {
