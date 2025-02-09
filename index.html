@@ -49,9 +49,9 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const iframeUrls = [
-                'https://www.profitablecpmrate.com/j1kdjr9s6?key=f2d7571f8ce13d380e1cba14a12fe05b',
-                'https://www.profitablecpmrate.com/wna3bzxq?key=0cd41fc5457b22a8eeeccaefd376b64f',
-                'https://www.profitablecpmrate.com/eey46mv65j?key=a2eac7825ff7405fadb076fb97cd352b'
+                'https://www.effectiveratecpm.com/q4tbink2t6?key=4f2fe948157a84b7a7c851c8162ddce9',
+                'https://www.effectiveratecpm.com/wna3bzxq?key=0cd41fc5457b22a8eeeccaefd376b64f',
+                'https://www.effectiveratecpm.com/j1kdjr9s6?key=f2d7571f8ce13d380e1cba14a12fe05b'
             ];
 
             const container = document.body;
@@ -61,7 +61,6 @@
                 const iframe = document.createElement('iframe');
                 iframe.src = url;
 
-                // Verifica se o iframe carregou com sucesso
                 iframe.onload = function() {
                     console.log(`Iframe ${currentIndex + 1} carregado com sucesso.`);
                     currentIndex++;
@@ -70,7 +69,6 @@
                     }
                 };
 
-                // Trata erros de carregamento
                 iframe.onerror = function() {
                     console.error(`Erro ao carregar iframe ${currentIndex + 1}. Tentando novamente...`);
                     const fallbackDiv = document.createElement('div');
@@ -78,10 +76,9 @@
                     fallbackDiv.textContent = 'Erro ao carregar o anúncio. Tentando o próximo...';
                     container.appendChild(fallbackDiv);
 
-                    // Tenta recarregar o iframe após 3 segundos
                     setTimeout(() => {
                         container.removeChild(fallbackDiv);
-                        addIframe(url); // Tenta carregar o mesmo iframe novamente
+                        addIframe(url);
                     }, 3000);
                 };
 
