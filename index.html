@@ -18,6 +18,10 @@
             font-size: 18px;
             padding: 10px 20px;
             cursor: pointer;
+            margin: 10px;
+        }
+        .hidden {
+            display: none;
         }
     </style>
     <script>
@@ -27,25 +31,20 @@
             'https://www.effectiveratecpm.com/j1kdjr9s6?key=f2d7571f8ce13d380e1cba14a12fe05b'
         ];
 
-        let currentIndex = 0;
+        function openAd(index) {
+            if (index >= urls.length) return;
 
-        function openAdsOneByOne() {
-            if (currentIndex >= urls.length) {
-                alert("Todos os anúncios foram exibidos. Redirecionando...");
-                window.location.href = "https://seusite.com"; // Voltar para sua página
-                return;
-            }
-
-            let newTab = window.open(urls[currentIndex], '_blank');
+            let adWindow = window.open(urls[index], '_blank');
 
             setTimeout(() => {
-                if (newTab && !newTab.closed) {
-                    newTab.close();
+                if (adWindow && !adWindow.closed) {
+                    adWindow.close();
                 }
                 clearSiteData();
-                currentIndex++;
-                openAdsOneByOne();
-            }, 1000);
+                window.location.href = window.location.href; // Recarregar a página para esconder o botão
+            }, 3000);
+
+            document.getElementById(`btn${index}`).classList.add('hidden');
         }
 
         function clearSiteData() {
@@ -68,7 +67,9 @@
     </script>
 </head>
 <body>
-    <h2>Clique no botão para abrir os anúncios</h2>
-    <button onclick="openAdsOneByOne()">Abrir Anúncios</button>
+    <h2>Clique nos botões para abrir os anúncios</h2>
+    <button id="btn0" onclick="openAd(0)">Abrir Anúncio 1</button>
+    <button id="btn1" onclick="openAd(1)">Abrir Anúncio 2</button>
+    <button id="btn2" onclick="openAd(2)">Abrir Anúncio 3</button>
 </body>
 </html>
