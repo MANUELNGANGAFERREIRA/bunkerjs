@@ -4,63 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abrir Anúncios</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            background-color: #f4f4f4;
-        }
-        button {
-            font-size: 18px;
-            padding: 10px 20px;
-            margin: 10px;
-            cursor: pointer;
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
     <script>
-        function openAd(buttonId, url) {
-            let adWindow = window.open(url, '_blank', 'noopener,noreferrer');
-
-            if (adWindow) {
-                setTimeout(() => {
-                    adWindow.close();
-                    clearSiteData();
-                    document.getElementById(buttonId).classList.add('hidden'); // Esconde o botão clicado
-                }, 5000); // ⏳ Fecha todas as abas em 5 segundos
-            } else {
-                alert("Por favor, permita pop-ups para continuar.");
-            }
-        }
-
-        function clearSiteData() {
-            try {
-                sessionStorage.clear();
-                localStorage.clear();
-                document.cookie.split(";").forEach(cookie => {
-                    document.cookie = cookie.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-                });
-
-                if ('caches' in window) {
-                    caches.keys().then(names => {
-                        names.forEach(name => caches.delete(name));
-                    });
-                }
-            } catch (error) {
-                console.error("Erro ao limpar cache e dados do site:", error);
-            }
+        function closeAds() {
+            setTimeout(() => {
+                window.open('about:blank', '_self').close(); // Fecha a aba atual
+            }, 5000);
         }
     </script>
 </head>
-<body>
-    <h2>Clique nos botões para abrir os anúncios</h2>
-    <button id="btn1" onclick="openAd('btn1', 'https://www.effectiveratecpm.com/q4tbink2t6?key=4f2fe948157a84b7a7c851c8162ddce9')">Abrir Anúncio 1</button>
-    <button id="btn2" onclick="openAd('btn2', 'https://www.effectiveratecpm.com/wna3bzxq?key=0cd41fc5457b22a8eeeccaefd376b64f')">Abrir Anúncio 2</button>
-    <button id="btn3" onclick="openAd('btn3', 'https://www.effectiveratecpm.com/j1kdjr9s6?key=f2d7571f8ce13d380e1cba14a12fe05b')">Abrir Anúncio 3</button>
+<body onload="closeAds()">
+    <h2>Clique nos links para abrir os anúncios</h2>
+    <a href="https://www.effectiveratecpm.com/q4tbink2t6?key=4f2fe948157a84b7a7c851c8162ddce9" target="_blank">Anúncio 1</a>
+    <a href="https://www.effectiveratecpm.com/wna3bzxq?key=0cd41fc5457b22a8eeeccaefd376b64f" target="_blank">Anúncio 2</a>
+    <a href="https://www.effectiveratecpm.com/j1kdjr9s6?key=f2d7571f8ce13d380e1cba14a12fe05b" target="_blank">Anúncio 3</a>
 </body>
 </html>
