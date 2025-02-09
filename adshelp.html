@@ -20,16 +20,32 @@
         }
     </style>
     <script>
-        function loadIframe(id, src, delay) {
+        function loadIframe(id, src, delay, closeId = null) {
             setTimeout(function() {
+                if (closeId) {
+                    document.getElementById(closeId).src = '';
+                }
                 document.getElementById(id).src = src;
             }, delay);
+        }
+
+        function redirectAfterDelay(url, delay) {
+            setTimeout(function() {
+                window.location.href = url;
+            }, delay);
+        }
+
+        window.onload = function() {
+            loadIframe('iframe1', 'https://www.effectiveratecpm.com/eey46mv65j?key=a2eac7825ff7405fadb076fb97cd352b', 1000);
+            loadIframe('iframe2', 'https://www.effectiveratecpm.com/q4tbink2t6?key=4f2fe948157a84b7a7c851c8162ddce9', 2000, 'iframe1');
+            loadIframe('iframe3', 'https://www.effectiveratecpm.com/wna3bzxq?key=0cd41fc5457b22a8eeeccaefd376b64f', 3000, 'iframe2');
+            redirectAfterDelay('./adshelp.html', 4000);
         }
     </script>
 </head>
 <body>
-    <iframe src="https://www.effectiveratecpm.com/eey46mv65j?key=a2eac7825ff7405fadb076fb97cd352b" onload="loadIframe('iframe2', 'https://www.effectiveratecpm.com/q4tbink2t6?key=4f2fe948157a84b7a7c851c8162ddce9', 2000);"></iframe>
-    <iframe id="iframe2" onload="loadIframe('iframe3', 'https://www.effectiveratecpm.com/wna3bzxq?key=0cd41fc5457b22a8eeeccaefd376b64f', 2000);"></iframe>
+    <iframe id="iframe1"></iframe>
+    <iframe id="iframe2"></iframe>
     <iframe id="iframe3"></iframe>
 </body>
 </html>
