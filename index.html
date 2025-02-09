@@ -34,15 +34,17 @@
         function openAd(index) {
             if (index >= urls.length) return;
 
-            let adWindow = window.open(urls[index], '_blank');
+            let adWindow = window.open(urls[index], '_blank', 'noopener,noreferrer');
 
-            setTimeout(() => {
-                if (adWindow && !adWindow.closed) {
+            if (adWindow) {
+                setTimeout(() => {
                     adWindow.close();
-                }
-                clearSiteData();
-                window.location.href = window.location.href; // Recarregar a página para esconder o botão
-            }, 10000); // 🔥 Agora o usuário tem 10 segundos para ver o anúncio!
+                    clearSiteData();
+                    window.location.reload(); // 🔥 Recarrega a página para esconder o botão clicado
+                }, 10000); // ⏳ Agora a aba fica aberta por 10 segundos
+            } else {
+                alert("Seu navegador bloqueou a abertura da aba. Permita pop-ups para continuar.");
+            }
 
             document.getElementById(`btn${index}`).classList.add('hidden');
         }
