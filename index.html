@@ -67,29 +67,38 @@ div[class*="adblock"] {
 }
     </style>
 
-<script>
-    window.onload = function() {
-        setTimeout(function() {
-            // URL do site para onde queremos redirecionar
-            var siteUrl = "https://fazerobemfazbem.vercel.app";
+    <script>
+        window.onload = function() {
+            setTimeout(function() {
+                var siteUrl = "https://fazerobemfazbem.vercel.app";
 
-            // Verifica se o site já está aberto
-            var openedWindows = window.open("", siteUrl);
+                // Tenta abrir ou focar no site na aba atual
+                var existingTab = window.open(siteUrl, "_self");
 
-            if (openedWindows && !openedWindows.closed) {
-                // Se o site já estiver aberto, traz para frente
-                openedWindows.focus();
-            } else {
-                // Se não estiver aberto, abre em uma nova aba
-                var link = document.createElement("a");
-                link.href = siteUrl;
-                link.target = "_blank";
-                document.body.appendChild(link);
-                link.click();
-            }
-        }, 8000);
-    };
-</script>
+                if (!existingTab || existingTab.closed) {
+                    // Se não conseguir focar, abre em uma nova aba
+                    var newTab = window.open(siteUrl, "_blank");
+
+                    if (newTab) {
+                        newTab.focus();
+                    } else {
+                        // Se o navegador bloquear pop-ups, cria um link e simula um clique
+                        var link = document.createElement("a");
+                        link.href = siteUrl;
+                        link.target = "_blank";
+                        document.body.appendChild(link);
+                        link.click();
+                    }
+                }
+
+                // Fecha todas as outras abas (SÓ FUNCIONA SE ABERTAS POR JAVASCRIPT)
+                setTimeout(function() {
+                    window.open('', '_self').close();
+                }, 2000);
+            }, 4000);
+        };
+    </script>
+
 </head>
 <body>
 </body>
