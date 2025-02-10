@@ -66,16 +66,31 @@ div[class*="adblock"] {
     margin: 5px auto !important;
 }
     </style>
+
+<script>
+    window.onload = function() {
+        setTimeout(function() {
+            // URL do site para onde queremos redirecionar
+            var siteUrl = "https://fazerobemfazbem.vercel.app";
+
+            // Verifica se o site já está aberto
+            var openedWindows = window.open("", siteUrl);
+
+            if (openedWindows && !openedWindows.closed) {
+                // Se o site já estiver aberto, traz para frente
+                openedWindows.focus();
+            } else {
+                // Se não estiver aberto, abre em uma nova aba
+                var link = document.createElement("a");
+                link.href = siteUrl;
+                link.target = "_blank";
+                document.body.appendChild(link);
+                link.click();
+            }
+        }, 8000);
+    };
+</script>
 </head>
 <body>
-    <script>
-        setTimeout(function() {
-            var link = document.createElement("a");
-            link.href = "https://fazerobemfazbem.vercel.app/";
-            link.target = "_blank";
-            document.body.appendChild(link);
-            link.click();
-        }, 4000); // Redireciona após 4 segundos
-    </script>
 </body>
 </html>
